@@ -1,0 +1,23 @@
+.navbar {
+  max-height: 50px;
+  transition: 0.4s ease-in-out;
+}
+
+.nav-link{
+  transition:0.3s;
+}
+.navbar-brand{
+  transition:0.3s;
+}
+.nav-link:hover{
+  transform:translateY(-5px);
+  color:#F6F6F6;
+}
+.navbar-brand:hover{
+  transform:translateY(-7px);
+  color:#F6F6F6;
+}
+.navbar:hover {
+  filter: brightness(1.3);
+  background-color: transparentize(#0F1214,0.3);
+}

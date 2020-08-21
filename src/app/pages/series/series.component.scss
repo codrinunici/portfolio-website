@@ -1,0 +1,45 @@
+.container-fluid {
+  display: flex;
+  padding: 0;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  height:100vh;
+}
+
+.image-container {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.series-image {
+  display: flex;
+  -webkit-transition: 0.6s ease;
+  transition: 0.6s ease;
+  width: 100%;
+  object-fit: cover;
+  opacity: 1;
+}
+
+.image-caption {
+  opacity: 0;
+  transition: 0.5s ease;
+  position: absolute;
+  color: white;
+  top:60%;
+  font-weight: bolder;
+  font-size: 130%;
+  text-align: justify;
+}
+.image-container:hover .series-image {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  filter:brightness(0.7);
+}
+.image-container:hover .image-caption {
+  opacity: 1;
+}
+

@@ -1,0 +1,34 @@
+:host {
+  ngb-carousel.home-carousel::ng-deep {
+    .carousel-item {
+      display: flex;
+      height: 100vh;
+      position: absolute;
+      transition: opacity 1s ease-out, visibility 1s;
+      opacity: 0;
+      visibility: hidden;
+      > img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .carousel-item.active {
+      display: flex;
+      flex-flow: row;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: opacity 1s ease-in, visibility 1s;
+      visibility: visible;
+      position: relative;
+      opacity: 1;
+      > img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+

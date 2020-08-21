@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  position:absolute;
+  justify-content: space-evenly;
+  align-content: center;
+  right: 0;
+  top: 1%;
+  width:7%;
+  z-index:1;
+}
+
+.insta-icon {
+  font-size: 40px;
+  position: relative;
+  transition:0.3s;
+}
+
+.insta-icon:hover{
+  transform: translateY(5px);
+}
+

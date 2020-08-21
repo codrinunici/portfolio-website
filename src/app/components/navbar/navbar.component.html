@@ -1,0 +1,8 @@
+<nav class="navbar navbar-expand-sm fixed-bottom ">
+  <a class="navbar-brand edgy-font" href="">Home Page</a>
+  <ul class="navbar-nav">
+    <li class="nav-item mr-1 pt-1" *ngFor="let option of navbarOptions">
+      <a class=" nav-link edgy-font" href="{{option.path}}">{{option.name}}</a>
+    </li>
+  </ul>
+</nav>
