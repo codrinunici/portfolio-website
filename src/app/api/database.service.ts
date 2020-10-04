@@ -27,13 +27,32 @@ export class DatabaseService {
     return ref.listAll();
   }
 
+  async linksGetter(path: string) {
+    const promisestest = [];
+    const urls = [];
+    const finalUrls: [{
+      name: string,
+      url: string
+    }] = [{name: '', url: ''}];
+    const test = await this.getImageLinks(path).toPromise();
+    test.items.forEach(item => {
+      promisestest.push(item.getDownloadURL());
+      urls.push(item.name);
+    });
+    const snapshots = await Promise.all(promisestest);
+    snapshots.forEach((item, index) =>
+      finalUrls.push({name: urls[index], url: item})
+    );
+    finalUrls.shift();
+    finalUrls.sort((a, b) => a.name > b.name ? 1 : -1);
+    return finalUrls;
+  }
+
+
   addImages(data: any, path: string) {
     data.forEach(links => {
-      if (links['url'] != '') {
         this.afs.collection(path).add(links);
-      }
     });
-
   }
 }
 

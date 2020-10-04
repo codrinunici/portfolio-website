@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AppComponent} from './app.component';
 import {HomeCarouselComponent} from './components/home-carousel/home-carousel.component';
 import {HomeAliasComponent} from './components/home-alias/home-alias.component';
@@ -50,12 +49,15 @@ export class AppModule {
 }
 
 
-/** todo: responsive navbar and pictures
+/** todo: portfolio pages template
  *        analytics
  *        router animations
- *        spinner on load and async load of data
- *        dynamic background
- *        change full images size (smaller)
  *        fix portfolio modal
  *        rest of pages
- * */
+ *        enlarge navbar on reaching bottom of pageo
+ *        unsubscribe observables at end of life
+ *        click on window kills nav
+ *        add all browser suppor
+ *        wtf is wrong with the carousel
+ *        */
+

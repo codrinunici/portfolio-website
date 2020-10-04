@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {DatabaseService} from '../../api/database.service';
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-series',
@@ -13,10 +14,16 @@ export class SeriesComponent implements OnInit, OnDestroy {
     name: string;
     url: string;
   }] = [{name: '', url: ''}];
+
   private imageFull: [{
-    name: string;
-    url: string;
-  }] = [{name: '', url: ''}];
+    name_large: string;
+    url_large: string;
+    name_medium: string;
+    url_medium: string;
+    name_small: string;
+    url_small: string;
+  }] = [{name_large: '', url_large: '', name_medium: '', url_medium: '', name_small: '', url_small: ''}];
+
 
   private bothImageLinks = [{}];
   public $destroy: Subject<boolean>;
@@ -39,27 +46,52 @@ export class SeriesComponent implements OnInit, OnDestroy {
     this.$destroy.unsubscribe();
   }
 
-  updateImages() {
-    this.database.getImageLinks('/portfolio-pages/tragedy/thumbnails')
-      .subscribe(imageEntry => imageEntry.items
-        .map(url => url.getDownloadURL()
-          .then(downloadUrl => this.imageThumbnails.push({url: downloadUrl, name: url.name}))));
-    this.imageThumbnails.shift();
-    this.imageThumbnails.sort((a, b) => a.name > b.name ? 1 : -1);
 
-    this.database.getImageLinks('/portfolio-pages/tragedy/full-size')
-      .subscribe(imageEntry => imageEntry.items
-        .map(url => url.getDownloadURL()
-          .then(downloadUrl => this.imageFull.push({url: downloadUrl, name: url.name}))));
-    this.imageFull.shift();
-    this.imageFull.sort((a, b) => a.name > b.name ? 1 : -1);
-    //
+  async updateImages() {
+    let imageFullLg: [{
+      name: string,
+      url: string
+    }] = [{name: '', url: ''}];
+    let imageFullMd: [{
+      name: string,
+      url: string
+    }] = [{name: '', url: ''}];
+    let imageFullSm: [{
+      name: string,
+      url: string
+    }] = [{name: '', url: ''}];
 
-    this.imageThumbnails.forEach((item, index) => {
-      this.bothImageLinks.push({thumbnail: item['url'], fullsize: this.imageFull[index]['url']});
+    this.imageThumbnails = await this.database.linksGetter('/portfolio-pages/tragedy/thumbnails');
+    imageFullLg = await this.database.linksGetter('/portfolio-pages/tragedy/full-size/large');
+    imageFullMd = await this.database.linksGetter('/portfolio-pages/tragedy/full-size/medium');
+    imageFullSm = await this.database.linksGetter('/portfolio-pages/tragedy/full-size/small');
+    imageFullLg.forEach((item, i) => {
+      this.imageFull.push(
+        {
+          name_large: item['name'], url_large: item['url'],
+          name_medium: imageFullMd[i]['name'], url_medium: imageFullMd[i]['url'],
+          name_small: imageFullSm[i]['name'], url_small: imageFullSm[i]['url']
+        });
     });
-    this.imageFull = [{name: '', url: ''}];
-    this.imageThumbnails = [{name: '', url: ''}];
+    this.imageFull.shift();
+    this.imageThumbnails.forEach((item, index) => {
+      this.bothImageLinks.push({
+        thumbnail: item['name'],
+        thumbnailUrl: item['url'],
+        fullSizeLarge: this.imageFull[index]['name_large'],
+        fullSizeMedium: this.imageFull[index]['name_medium'],
+        fullSizeSmall: this.imageFull[index]['name_small'],
+        fullSizeUrlLarge: this.imageFull[index]['url_large'],
+        fullSizeUrlMedium: this.imageFull[index]['url_medium'],
+        fullSizeUrlSmall: this.imageFull[index]['url_small'],
+      });
+    });
+    this.imageFull = [{name_large: '', url_large: '', name_medium: '', url_medium: '', name_small: '', url_small: ''}];
+    this.imageThumbnails = [{
+      name: '',
+      url: ''
+    }];
+    this.bothImageLinks.shift();
     if (this.bothImageLinks.length > 1) {
       this.database.addImages(this.bothImageLinks, 'tragedy');
     }

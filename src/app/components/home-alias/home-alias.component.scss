@@ -1,18 +1,20 @@
 .container {
   display: flex;
-  position:absolute;
-  justify-content: space-evenly;
+  position:fixed;
+  justify-content: flex-end;
   align-content: center;
+  width: 100%;
   right: 0;
   top: 1%;
-  width:7%;
   z-index:1;
 }
 
 .insta-icon {
   font-size: 40px;
   position: relative;
+  margin-left: 5px;
   transition:0.3s;
+  color:#F6F6F6;
 }
 
 .insta-icon:hover{

@@ -1,8 +1,25 @@
-<nav class="navbar navbar-expand-sm fixed-bottom ">
-  <a class="navbar-brand edgy-font" href="">Home Page</a>
-  <ul class="navbar-nav">
-    <li class="nav-item mr-1 pt-1" *ngFor="let option of navbarOptions">
-      <a class=" nav-link edgy-font" href="{{option.path}}">{{option.name}}</a>
-    </li>
-  </ul>
+<!--<nav class="navbar navbar-expand-lg position-fixed">-->
+<!--  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">-->
+<!--    <span class="navbar-toggler-icon"> <i class=" fa fa-bars edgy-font"></i></span>-->
+<!--  </button>-->
+<!--  <div class="collapse navbar-collapse" id="navbarCollapse">-->
+<!--    <a class="navbar-brand edgy-font" href="">Home Page</a>-->
+<!--    <ul class="nav navbar-nav">-->
+<!--      <li class="nav-item mr-1 pt-1" *ngFor="let option of navbarOptions">-->
+<!--        <a class=" nav-link edgy-font" href="{{option.path}}">{{option.name}}</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</nav>-->
+
+<nav id="bottomNav" class="bottom-nav">
+  <div class="nav-brand edgy-font">
+    <a class=" edgy-font" href="">Home</a>
+  </div>
+  <div class="nav-object link" *ngFor="let option of navbarOptions">
+    <a class=" edgy-font" href="{{option.path}}">{{option.name}}</a>
+  </div>
+  <button class="btn nav-icon" (click)="navbarRespond()">
+    <i class="fa fa-bars "></i>
+  </button>
 </nav>

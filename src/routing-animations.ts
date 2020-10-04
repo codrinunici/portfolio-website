@@ -10,12 +10,12 @@ export const fader =
           left: 0,
           width: '100%',
           opacity: 0,
-          transition: ' 1s fade-out',
+          transform: 'scale(0) translateY(100%)',
         }),
       ]),
       // Animate the new page in
       query(':enter', [
-        animate('1s ease', style({opacity: 1, transition: 'fade-in'}))
+        animate('600ms ease', style({ opacity: 1, transform: 'scale(1) translateY(0)' })),
       ])
     ]),
   ]);

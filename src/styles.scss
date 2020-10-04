@@ -7,8 +7,15 @@
 .edgy-font {
   color: #F6F6F6;
   font-size: larger;
+  font-family: Alcubierre;
+  letter-spacing: 1.5px;
 }
-
+a{
+  text-decoration: none !important;
+}
+a:hover{
+  color:white;
+}
 .secondary {
   background-color: #0F1214;
 }
