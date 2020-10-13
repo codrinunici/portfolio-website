@@ -1,23 +1,15 @@
-<ngb-carousel interval="10000" pauseOnHover="true" [showNavigationIndicators]="false" class="home-carousel" >
-  <ng-template ngbSlide>
-    <img class="carousel-image"
-         src="{{testImage[0].url}}"
-         alt="Random first slide"
-    >
-  </ng-template>
+<app-load-spinner *ngIf="showSpinner"></app-load-spinner>
 
-  <ng-template ngbSlide>
+<ngb-carousel *ngIf="showImages"
+              interval="10000"
+              pauseOnHover="true"
+              [showNavigationIndicators]="false"
+              class="home-carousel"
+              >
+  <ng-template *ngFor="let image of carouselImages" ngbSlide>
     <img class="carousel-image"
-         src="{{testImage[1].url}}"
-         alt="Random second slide"
-    >
+         src="{{image.url}}"
+         alt="Random slide"
+         (load)="spinnerDissapears()">
   </ng-template>
-
-  <ng-template ngbSlide>
-    <img class="carousel-image"
-         src="{{testImage[2].url}}"
-         alt="Random third slide"
-    >
-  </ng-template>
-
 </ngb-carousel>

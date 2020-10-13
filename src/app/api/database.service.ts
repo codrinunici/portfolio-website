@@ -48,10 +48,9 @@ export class DatabaseService {
     return finalUrls;
   }
 
-
   addImages(data: any, path: string) {
     data.forEach(links => {
-        this.afs.collection(path).add(links);
+      this.afs.collection(path).add(links);
     });
   }
 }

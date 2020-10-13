@@ -4,11 +4,10 @@
   justify-content: space-between;
   padding: 0;
   margin: 0;
-  background-image: url(../../../../assets/background-tragedy.jpg);
   background-attachment: scroll;
-  background-position: center;
+  background-position: center 0;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 200%;
 }
 
 .image-panel {
@@ -24,13 +23,12 @@
 
 .modal-dialog {
   position: absolute;
-  left: 0;
+  left: -10px;
 }
 
 .image-thumbnail:hover {
   filter: brightness(1.5);
 }
-
 
 @media only screen and (max-width: 799px) {
   div.image-panel {

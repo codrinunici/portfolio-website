@@ -1,0 +1,38 @@
+<app-load-spinner *ngIf="showSpinner"></app-load-spinner>
+<div id="page-content" *ngIf="showImages" class="container-fluid " style="background-image:url({{backgroundImage}})">
+  <div class="series-description  col-md-6 col-lg-6  edgy-font">
+    {{seriesText}}
+  </div>
+  <div class="image-panel  col-md-6 col-lg-6">
+    <a href="" (click)="setFullSizeDynamically(portfolioImage)"
+       *ngFor="let portfolioImage of images"
+       data-toggle="modal"
+       data-target="#fullImageModal">
+      <img *ngIf="portfolioImage.name!==''"
+           class="image-thumbnail"
+           src="{{portfolioImage.url_medium}}"
+           alt="fuck"
+           (load)="spinnerDissapears()">
+    </a>
+  </div>
+</div>
+
+<div class="modal hide fade "
+     id="fullImageModal"
+     tabindex="-1"
+     role="document"
+     aria-labelledby="fullImageModal"
+     aria-hidden="true"
+     *ngIf="chosenImage!=''"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-title">
+    </div>
+    <div class="modal-body">
+      <img [src]="chosenImage.url_large"
+           srcset="{{chosenImage.url_medium}} 700w,
+                  {{chosenImage.url_large}} 2000w "
+           alt="fuck squared">
+    </div>
+  </div>
+</div>

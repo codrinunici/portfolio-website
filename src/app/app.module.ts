@@ -18,6 +18,11 @@ import {TragedyComponent} from './pages/portfolio-pages/tragedy/tragedy.componen
 import {PortraitsComponent} from './pages/portfolio-pages/portraits/portraits.component';
 import {SeriesComponent} from './pages/series/series.component';
 import {LoadSpinnerComponent} from './components/load-spinner/load-spinner.component';
+import { PortfolioPageTemplateComponent } from './pages/templates/portfolio-page-template/portfolio-page-template.component';
+import { HomageComponent } from './pages/portfolio-pages/homage/homage.component';
+import { EventsPortraitsTemplateComponent } from './pages/templates/events-portraits-template/events-portraits-template.component';
+import { EventsComponent } from './pages/events/events.component';
+import { CollectionSelectionTemplateComponent } from './pages/templates/collection-selection-template/collection-selection-template.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +37,11 @@ import {LoadSpinnerComponent} from './components/load-spinner/load-spinner.compo
     PortraitsComponent,
     SeriesComponent,
     LoadSpinnerComponent,
+    PortfolioPageTemplateComponent,
+    HomageComponent,
+    EventsPortraitsTemplateComponent,
+    EventsComponent,
+    CollectionSelectionTemplateComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,15 +59,15 @@ export class AppModule {
 }
 
 
-/** todo: portfolio pages template
- *        analytics
- *        router animations
- *        fix portfolio modal
+/** todo:
  *        rest of pages
- *        enlarge navbar on reaching bottom of pageo
- *        unsubscribe observables at end of life
+ *        add all browser support
+ *        text is now field in firebase
+ *        analytics
+ *        recheck image sizes *
+ *        enlarge navbar on reaching bottom of page
+ *        unsubscribe observables at end of life *
  *        click on window kills nav
- *        add all browser suppor
- *        wtf is wrong with the carousel
+ *        prepare tragedy images
  *        */
 

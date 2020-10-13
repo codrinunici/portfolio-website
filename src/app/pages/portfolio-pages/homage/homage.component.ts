@@ -2,18 +2,18 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject} from "rxjs";
 
 @Component({
-  selector: 'app-portraits',
-  templateUrl: './portraits.component.html',
-  styleUrls: ['./portraits.component.scss']
+  selector: 'app-homage',
+  templateUrl: './homage.component.html',
+  styleUrls: ['./homage.component.css']
 })
-export class PortraitsComponent implements OnInit, OnDestroy {
-
+export class HomageComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean>;
 
   // inputs
-  imagesPath = 'portraits';
+
+  imagesPath = 'homage';
   seriesText = 'test';
-  backgroundImage = '../../../../assets/background-portraits.jpg';
+  backgroundImage = '../../../../assets/background-homage.jpg';
 
   constructor() {
   }

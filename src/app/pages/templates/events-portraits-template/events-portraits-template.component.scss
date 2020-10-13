@@ -1,36 +1,43 @@
 .container-fluid {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  flex-flow: column wrap;
+  justify-content: space-around;
   padding: 0;
   margin: 0;
-  background-image: url(../../../../assets/background-tragedy.jpg);
   background-attachment: scroll;
-  background-position: center;
+  background-position: center 0;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 200%;
+
 }
 
 .image-panel {
   column-count: 3;
-  column-gap: 0;
-  padding: 0;
+  column-gap: 10px;
+  margin-left: 5%;
+  margin-right: 5%;
+
 }
 
 .image-thumbnail {
   width: 100%;
   transition: 0.4s ease;
+  margin-bottom: 10px;
+}
+.ep-description{
+  margin-bottom: 40px;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .modal-dialog {
   position: absolute;
-  left: 0;
+  left: -10px;
 }
 
 .image-thumbnail:hover {
   filter: brightness(1.5);
 }
-
 
 @media only screen and (max-width: 799px) {
   div.image-panel {
@@ -43,6 +50,13 @@
   }
   .image-thumbnail:hover {
     filter: brightness(1);
+  }
+  .image-panel{
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .image-thumbnail{
+    margin-bottom: 0;
   }
 }
 

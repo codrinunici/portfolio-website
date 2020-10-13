@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {fromEvent, Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +10,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   navbarOptions = [
     {name: 'Series', path: 'series'},
     {name: 'Portraits', path: 'portraits'},
+    {name: 'Events', path: 'events'},
     {name: 'Bio', path: 'bio'},
     {name: 'Contact', path: 'contact'}
   ];

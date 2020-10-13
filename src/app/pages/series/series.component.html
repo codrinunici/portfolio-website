@@ -1,17 +1,5 @@
-<button style="align-self: center" class="btn btn-primary btn-dark" (click)="updateImages()">Update stuff</button>
+<button style="align-self: center"
+        class="btn btn-primary btn-dark"
+        (click)="updateImages()">Update stuff</button>
 
-<div class="container-fluid p-5" >
-  <div class="image-container " >
-    <a href="{{seriesThumbnails[0].path}}">
-    <img class="series-image" src="{{seriesThumbnails[0].url}}">
-  </a>
-    <div class="image-caption">{{seriesThumbnails[0].title}}</div>
-
-  </div>
-<div class="image-container" >
-  <a href="{{seriesThumbnails[1].path}}">
-  <img class="series-image" src="{{seriesThumbnails[1].url}}" >
-  </a>
-  <div class="image-caption">{{seriesThumbnails[1].title}}</div>
-  </div>
-</div>
+<app-collection-selection-template  [backgroundImage]="backgroundImage" [imagesPath]="imagesPath"></app-collection-selection-template>
