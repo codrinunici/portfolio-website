@@ -17,25 +17,31 @@ export class EventsPortraitsTemplateComponent implements OnInit, OnDestroy {
   @Input()
   imagesPath = '';
   @Input()
-  epText = '';
-  @Input()
   backgroundImage = '';
 
   images = [];
   chosenImage: any = '';
   showSpinner = true;
   showImages = false;
+  fullImageSize = '';
 
   constructor(private database: DatabaseService) {
   }
 
   ngOnInit() {
+    if (window.innerWidth > 2160) {
+      this.imagesPath = this.imagesPath + '2k4k';
+      this.fullImageSize = '4000w';
+
+    } else {
+      this.fullImageSize = '2000w';
+    }
+
     this.destroy$ = new Subject<boolean>();
-    this.database.getSeries(this.imagesPath).pipe(takeUntil(this.destroy$)).subscribe(data => {
-        data.map(url => this.images.push(url));
+    this.database.getImages(this.imagesPath).pipe(takeUntil(this.destroy$)).subscribe(data => {
+      data.map(url => this.images.push(url));
       this.showImages = true;
     });
-    console.log(this.images);
     fromEvent(window, 'scroll').pipe(takeUntil(this.destroy$))
       .subscribe((e: Event) => {
         const scrolltotop = document.scrollingElement.scrollTop;
@@ -60,7 +66,12 @@ export class EventsPortraitsTemplateComponent implements OnInit, OnDestroy {
     this.imgLoadedCount++;
     if (this.imgLoadedCount === this.images.length - 1) {
       this.showSpinner = false;
+      var content = document.getElementById("page-content");
+      console.log(window.outerHeight)
+      if (content.offsetHeight < window.outerHeight)
+        content.style.height = "125vh";
     }
+
   }
 
   ngOnDestroy(): void {

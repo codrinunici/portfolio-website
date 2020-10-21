@@ -8,16 +8,6 @@
   top: 1%;
   z-index:1;
 }
-
-.insta-icon {
-  font-size: 40px;
-  position: relative;
-  margin-left: 5px;
-  transition:0.3s;
-  color:#F6F6F6;
-}
-
-.insta-icon:hover{
+.icon:hover{
   transform: translateY(5px);
 }
-

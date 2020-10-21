@@ -1,8 +1,5 @@
 <app-load-spinner *ngIf="showSpinner"></app-load-spinner>
 <div id="page-content" *ngIf="showImages" class="container-fluid " style="background-image:url({{backgroundImage}})">
-  <div class="ep-description  edgy-font">
-    {{epText}}
-  </div>
   <div class="image-panel ">
     <a href="" (click)="setFullSizeDynamically(epImage)"
        *ngFor="let epImage of images"
@@ -30,8 +27,7 @@
     </div>
     <div class="modal-body">
       <img [src]="chosenImage.url_large"
-           srcset="{{chosenImage.url_medium}} 700w,
-                  {{chosenImage.url_large}} 2000w "
+           srcset="{{chosenImage.url_large}} {{fullImageSize}} "
            alt="fuck squared">
     </div>
   </div>

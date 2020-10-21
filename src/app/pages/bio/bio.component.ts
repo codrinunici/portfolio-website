@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-bio',
@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bio.component.scss']
 })
 export class BioComponent implements OnInit {
-
-  constructor() { }
+  bioImage: any;
+  bioBackground = '../../../assets/background-homage.jpg';
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

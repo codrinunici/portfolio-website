@@ -2,11 +2,13 @@
   display: flex;
   padding: 0;
   flex-flow: row wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   height:100vh;
+  background-attachment: scroll;
+  background-position: center 0;
+  background-repeat: no-repeat;
   background-size: 200%;
-
 }
 
 .image-container {
@@ -15,33 +17,40 @@
   position: relative;
   justify-content: center;
   align-items: center;
+  margin:1%;
 }
 
 .series-image {
   display: flex;
   -webkit-transition: 0.6s ease;
   transition: 0.6s ease;
-  width: 100%;
   object-fit: cover;
   opacity: 1;
+  height:40vh;
+  width:71.1vh;
 }
 
 .image-caption {
   opacity: 0;
   transition: 0.5s ease;
   position: absolute;
-  color: white;
-  top:60%;
+  color: #F6F6F6;
+  top:70%;
   font-weight: bolder;
-  font-size: 130%;
   text-align: justify;
 }
 .image-container:hover .series-image {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
   filter:brightness(0.7);
 }
 .image-container:hover .image-caption {
-  opacity: 1;
+  opacity: 0.8;
 }
 
+@media only screen and (max-width: 1250px){
+  .container-fluid{
+    background-size: cover;
+    height:150vh;
+  }
+}

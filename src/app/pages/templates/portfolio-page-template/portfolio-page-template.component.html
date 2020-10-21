@@ -30,8 +30,7 @@
     </div>
     <div class="modal-body">
       <img [src]="chosenImage.url_large"
-           srcset="{{chosenImage.url_medium}} 700w,
-                  {{chosenImage.url_large}} 2000w "
+           srcset="{{chosenImage.url_large}} {{fullImageSize}}"
            alt="fuck squared">
     </div>
   </div>

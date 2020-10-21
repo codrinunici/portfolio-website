@@ -20,7 +20,7 @@ export class HomeCarouselComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
-    this.database.getCarousel().pipe(takeUntil(this.destroy$)).subscribe(data => {
+    this.database.getImages('carousel').pipe(takeUntil(this.destroy$)).subscribe(data => {
       data.map(url => this.carouselImages.push(url));
       this.showImages = true;
     });

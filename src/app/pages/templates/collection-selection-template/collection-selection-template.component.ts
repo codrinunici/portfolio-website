@@ -1,6 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Subject} from "rxjs";
+import {fromEvent, Subject} from "rxjs";
 import {DatabaseService} from '../../../api/database.service';
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-collection-selection-template',
@@ -24,11 +25,22 @@ export class CollectionSelectionTemplateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (window.innerWidth > 2160)
+      this.imagesPath = this.imagesPath + '2k4k';
     this.$destroy = new Subject<boolean>();
-    this.database.getSeriesThumbnails().subscribe(data => {
+    this.database.getImages(this.imagesPath).subscribe(data => {
       data.map(url => this.seriesThumbnails.push(url));
       this.showImages = true;
     });
+    fromEvent(window, 'scroll').pipe(takeUntil(this.$destroy))
+      .subscribe((e: Event) => {
+        const scrolltotop = document.scrollingElement.scrollTop;
+        const target = document.getElementById('page-content');
+        const xvalue = 'center';
+        const factor = 0.8316;
+        const yvalue = scrolltotop * factor;
+        target.style.backgroundPosition = xvalue + ' ' + yvalue + 'px';
+      });
   }
 
   spinnerDissapears() {

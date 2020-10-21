@@ -18,11 +18,14 @@ import {TragedyComponent} from './pages/portfolio-pages/tragedy/tragedy.componen
 import {PortraitsComponent} from './pages/portfolio-pages/portraits/portraits.component';
 import {SeriesComponent} from './pages/series/series.component';
 import {LoadSpinnerComponent} from './components/load-spinner/load-spinner.component';
-import { PortfolioPageTemplateComponent } from './pages/templates/portfolio-page-template/portfolio-page-template.component';
-import { HomageComponent } from './pages/portfolio-pages/homage/homage.component';
-import { EventsPortraitsTemplateComponent } from './pages/templates/events-portraits-template/events-portraits-template.component';
-import { EventsComponent } from './pages/events/events.component';
-import { CollectionSelectionTemplateComponent } from './pages/templates/collection-selection-template/collection-selection-template.component';
+import {PortfolioPageTemplateComponent} from './pages/templates/portfolio-page-template/portfolio-page-template.component';
+import {HomageComponent} from './pages/portfolio-pages/homage/homage.component';
+import {EventsPortraitsTemplateComponent} from './pages/templates/events-portraits-template/events-portraits-template.component';
+import {CollectionSelectionTemplateComponent} from './pages/templates/collection-selection-template/collection-selection-template.component';
+import {PeopleComponent} from './pages/people/people.component';
+import {EventsComponent} from './pages/portfolio-pages/events/events.component';
+import {FestivalsComponent} from './pages/portfolio-pages/festivals/festivals.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -40,11 +43,15 @@ import { CollectionSelectionTemplateComponent } from './pages/templates/collecti
     PortfolioPageTemplateComponent,
     HomageComponent,
     EventsPortraitsTemplateComponent,
-    EventsComponent,
     CollectionSelectionTemplateComponent,
+    PeopleComponent,
+    EventsComponent,
+    FestivalsComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseconfig),
     AngularFirestoreModule.enablePersistence(),
     BrowserAnimationsModule,
@@ -60,14 +67,13 @@ export class AppModule {
 
 
 /** todo:
- *        rest of pages
- *        add all browser support
- *        text is now field in firebase
- *        analytics
- *        recheck image sizes *
- *        enlarge navbar on reaching bottom of page
- *        unsubscribe observables at end of life *
+ *        code refactor
+ *        disable right click
+ *        backgrounds bnw
+ *        carousel,tragedy images
+ *        texts for projects
+ *        initial deploy/analytics
  *        click on window kills nav
- *        prepare tragedy images
+ *        unsubscribe observables at end of life *
  *        */
 

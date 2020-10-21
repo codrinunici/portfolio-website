@@ -1,1 +1,57 @@
-<p>contact works!</p>
+<div  class="container-fluid" style="background-image: url({{contactBackground}})">
+  <h3 class="edgy-font">There are ways to contact me if you want to collaborate:</h3>
+  <form [formGroup]="contactForm" (submit)="onSubmit()" class="container" >
+    <label class="edgy-font" for="name">Name</label>
+    <input class="contact-input-field edgy-font" type="text" id="name" name="name" formControlName="name">
+    <div *ngIf="!controls.name?.valid && (controls.name?.dirty || controls.name?.touched)">
+      <div *ngIf=" submitted && controls.name.errors.required">
+        <p class="alert-danger">Your name is required, bummer</p>
+      </div>
+      <div *ngIf="submitted && controls.name.errors.pattern">
+        <p class="alert-danger">Letters and English characters please</p>
+      </div>
+      <div *ngIf="submitted && controls.name.errors.minlength">
+        <p class="alert-danger">I doubt your name is that short</p>
+      </div>
+    </div>
+    <label class="edgy-font" for="email">Contact mail</label>
+    <input class="contact-input-field edgy-font" type="text" id="email" name="email" formControlName="email">
+    <div *ngIf="!controls.email?.valid && (controls.email?.dirty || controls.email?.touched)">
+      <div *ngIf="submitted && controls.email.errors.required">
+        <p class="alert-danger">I might need your contact mail</p>
+      </div>
+      <div *ngIf="submitted && controls.email.errors.pattern">
+        <p class="alert-danger">We both know that's not a mail</p>
+      </div>
+    </div>
+    <label class="edgy-font" for="message">Your Message</label>
+    <textarea class="contact-input-field edgy-font" type="text" id="message" name="message" formControlName="message">
+              </textarea>
+
+    <div *ngIf="!controls.message?.valid && (controls.message?.dirty || controls.message?.touched)">
+      <div *ngIf="submitted && controls.message.errors.required">
+        <p class="alert-danger">No point in sending this with no message</p>
+      </div>
+      <div *ngIf="submitted && controls.message.errors.minlength">
+        <p class="alert-danger">Provide more information, if possible</p>
+      </div>
+    </div>
+    <button type="submit" class="btn-dark edgy-font contact-submit">Submit</button>
+  </form>
+
+
+  <div class="social-media-container">
+    <h3 class="edgy-font "> Don't like contact forms? Me neither, so you can reach out to me on social media:</h3>
+    <div class="icon-group">
+      <a href="https://www.linkedin.com/in/codrin-unici/" class="icon">
+        <i class="fab fa-linkedin "></i>
+      </a>
+      <a href="https://www.instagram.com/totallynotcodrin/" class="icon">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.facebook.com/codrin.unici/" class="icon">
+        <i class="fab fa-facebook"></i>
+      </a>
+    </div>
+  </div>
+</div>

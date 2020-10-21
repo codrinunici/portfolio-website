@@ -6,20 +6,84 @@
 
 .edgy-font {
   color: #F6F6F6;
-  font-size: larger;
   font-family: Alcubierre;
   letter-spacing: 1.5px;
-}
-a{
-  text-decoration: none !important;
-}
-a:hover{
-  color:white;
-}
-.secondary {
-  background-color: #0F1214;
+  font-size:20px;
 }
 
-.primary {
-  background-color: #1A1E1F;
+.edgy-title {
+  color: #F6F6F6;
+  font-family: Alcubierre;
+  letter-spacing: 2px;
+}
+
+.icon {
+  position: relative;
+  margin-left: 5px;
+  transition: 0.3s;
+  color: #F6F6F6;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: white;
+}
+
+@media only screen and (max-width: 767px) {
+  .edgy-font{
+    font-size:17px;
+  }
+  .icon{
+    font-size: 30px;
+  }
+  .edgy-title{
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1439px) {
+
+  .icon{
+    font-size: 45px;
+  }
+  .edgy-title{
+    font-size: 25px;
+  }
+}
+
+@media only screen and (min-width: 1440px) and (max-width: 2158px) {
+
+  .icon{
+    font-size:45px;
+  }
+  .edgy-title{
+    font-size:25px;
+  }
+}
+
+@media only screen and (min-width: 2159px) and (max-width: 3838px) {
+  .edgy-font {
+    font-size: 32px; //xx-large
+  }
+  .icon{
+    font-size:75px;
+  }
+  .edgy-title{
+    font-size:40px;
+  }
+}
+
+@media only screen and (min-width: 3839px) {
+  .edgy-font {
+    font-size: 48px; //gargantuan
+  }
+  .icon{
+    font-size:110px;
+  }
+  .edgy-title{
+    font-size:70px;
+  }
 }

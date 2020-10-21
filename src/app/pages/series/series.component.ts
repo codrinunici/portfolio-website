@@ -14,7 +14,7 @@ export class SeriesComponent implements OnInit, OnDestroy {
     url_medium: string;
   }] = [{name: '', url_large: '', url_medium: ''}];
   public $destroy: Subject<boolean>;
-  imagesPath = 'tragedy';
+  imagesPath = 'series-thumbnails';
   backgroundImage = '../../assets/background-series.jpg';
 
   constructor(private database: DatabaseService) {
@@ -38,8 +38,10 @@ export class SeriesComponent implements OnInit, OnDestroy {
       name: string,
       url: string
     }] = [{name: '', url: ''}];
-    imageFullLg = await this.database.linksGetter('/portfolio-pages/homage/large');
-    imageFullMd = await this.database.linksGetter('/portfolio-pages/homage/medium');
+    imageFullLg = await this.database.linksGetter('/portfolio-pages/events/large2k4k');
+    imageFullMd = await this.database.linksGetter('/portfolio-pages/events/medium2k4k');
+    console.log(imageFullMd)
+    console.log(imageFullLg)
     imageFullLg.forEach((item, i) => {
       this.imagesInfo.push(
         {
@@ -48,7 +50,7 @@ export class SeriesComponent implements OnInit, OnDestroy {
     });
     this.imagesInfo.shift();
     if (this.imagesInfo.length > 1) {
-      this.database.addImages(this.imagesInfo, 'homage');
+      this.database.addImages(this.imagesInfo, 'events2k4k');
     }
     this.imagesInfo = [{name: '', url_large: '', url_medium: ''}];
   }

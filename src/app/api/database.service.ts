@@ -10,16 +10,8 @@ export class DatabaseService {
   constructor(private afs: AngularFirestore, private ads: AngularFireStorage) {
   }
 
-  getSeries(path: string) {
+  getImages(path: string) {
     return this.afs.collection(path).valueChanges();
-  }
-
-  getCarousel() {
-    return this.afs.collection('/carousel').valueChanges();
-  }
-
-  getSeriesThumbnails() {
-    return this.afs.collection('/series-thumbnails').valueChanges();
   }
 
   getImageLinks(path: string) {
@@ -49,9 +41,15 @@ export class DatabaseService {
   }
 
   addImages(data: any, path: string) {
+    console.log(path)
     data.forEach(links => {
       this.afs.collection(path).add(links);
     });
+  }
+
+
+  sendMeEmail(contactData: any) {
+    console.log(contactData);
   }
 }
 

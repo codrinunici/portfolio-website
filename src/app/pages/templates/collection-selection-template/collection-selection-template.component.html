@@ -1,11 +1,11 @@
 <app-load-spinner *ngIf="showSpinner"></app-load-spinner>
 
-<div class="container-fluid p-5" *ngIf="showImages"  style="background-image:url({{backgroundImage}})">
+<div id="page-content" class="container-fluid p-5" *ngIf="showImages"  style="background-image:url({{backgroundImage}})">
   <div class="image-container"
        *ngFor="let thumbnail of seriesThumbnails">
     <a href="{{thumbnail.path}}">
       <img class="series-image" alt="missing-thumbnail" (load)="spinnerDissapears()" src="{{thumbnail.url}}" >
     </a>
-    <div class="image-caption">{{thumbnail.title}}</div>
+    <div class="image-caption edgy-title">{{thumbnail.title}}</div>
   </div>
 </div>
