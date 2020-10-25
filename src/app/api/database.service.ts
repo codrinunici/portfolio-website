@@ -10,7 +10,11 @@ export class DatabaseService {
   constructor(private afs: AngularFirestore, private ads: AngularFireStorage) {
   }
 
-  getImages(path: string) {
+  sendContactInfo(data: any) {
+    return this.afs.collection('contact').add(data);
+  }
+
+  getFromFirestore(path: string) {
     return this.afs.collection(path).valueChanges();
   }
 
@@ -20,18 +24,18 @@ export class DatabaseService {
   }
 
   async linksGetter(path: string) {
-    const promisestest = [];
+    const promisesSet = [];
     const urls = [];
     const finalUrls: [{
       name: string,
       url: string
     }] = [{name: '', url: ''}];
-    const test = await this.getImageLinks(path).toPromise();
-    test.items.forEach(item => {
-      promisestest.push(item.getDownloadURL());
+    const imageLinks = await this.getImageLinks(path).toPromise();
+    imageLinks.items.forEach(item => {
+      promisesSet.push(item.getDownloadURL());
       urls.push(item.name);
     });
-    const snapshots = await Promise.all(promisestest);
+    const snapshots = await Promise.all(promisesSet);
     snapshots.forEach((item, index) =>
       finalUrls.push({name: urls[index], url: item})
     );
@@ -48,9 +52,7 @@ export class DatabaseService {
   }
 
 
-  sendMeEmail(contactData: any) {
-    console.log(contactData);
-  }
+
 }
 
 

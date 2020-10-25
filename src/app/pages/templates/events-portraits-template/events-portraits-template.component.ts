@@ -38,7 +38,7 @@ export class EventsPortraitsTemplateComponent implements OnInit, OnDestroy {
     }
 
     this.destroy$ = new Subject<boolean>();
-    this.database.getImages(this.imagesPath).pipe(takeUntil(this.destroy$)).subscribe(data => {
+    this.database.getFromFirestore(this.imagesPath).pipe(takeUntil(this.destroy$)).subscribe(data => {
       data.map(url => this.images.push(url));
       this.showImages = true;
     });
@@ -66,12 +66,11 @@ export class EventsPortraitsTemplateComponent implements OnInit, OnDestroy {
     this.imgLoadedCount++;
     if (this.imgLoadedCount === this.images.length - 1) {
       this.showSpinner = false;
-      var content = document.getElementById("page-content");
-      console.log(window.outerHeight)
-      if (content.offsetHeight < window.outerHeight)
-        content.style.height = "125vh";
+      const content = document.getElementById('page-content');
+      if (content.offsetHeight < window.outerHeight) {
+        content.style.height = '110vh';
+      }
     }
-
   }
 
   ngOnDestroy(): void {

@@ -25,7 +25,8 @@ import {CollectionSelectionTemplateComponent} from './pages/templates/collection
 import {PeopleComponent} from './pages/people/people.component';
 import {EventsComponent} from './pages/portfolio-pages/events/events.component';
 import {FestivalsComponent} from './pages/portfolio-pages/festivals/festivals.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { DisableRightClickDirective } from './disable-right-click.directive';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     PeopleComponent,
     EventsComponent,
     FestivalsComponent,
+    DisableRightClickDirective,
   ],
   imports: [
     BrowserModule,
@@ -67,13 +69,10 @@ export class AppModule {
 
 
 /** todo:
- *        code refactor
- *        disable right click
- *        backgrounds bnw
- *        carousel,tragedy images
- *        texts for projects
+ *        unsubscribe observables at end of life **
  *        initial deploy/analytics
- *        click on window kills nav
- *        unsubscribe observables at end of life *
+ *        centralize templates
+ *        spinner and parallax on app.component only
  *        */
+
 

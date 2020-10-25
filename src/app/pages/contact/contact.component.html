@@ -36,7 +36,9 @@
         <p class="alert-danger">Provide more information, if possible</p>
       </div>
     </div>
-    <button type="submit" class="btn-dark edgy-font contact-submit">Submit</button>
+    <button [disabled]="success" type="submit" class="btn-dark edgy-font contact-submit">Submit</button>
+
+    <input class="issatrap" autocomplete="off" type="text" id="gotcha" name="trappy" formControlName="trappy">
   </form>
 
 

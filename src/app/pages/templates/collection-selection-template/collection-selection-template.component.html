@@ -6,6 +6,7 @@
     <a href="{{thumbnail.path}}">
       <img class="series-image" alt="missing-thumbnail" (load)="spinnerDissapears()" src="{{thumbnail.url}}" >
     </a>
-    <div class="image-caption edgy-title">{{thumbnail.title}}</div>
+    <div *ngIf="wereOnPhone === false" class="image-caption edgy-title">{{thumbnail.title}}</div>
+    <div *ngIf="wereOnPhone === true" class="image-caption-phone edgy-title">{{thumbnail.title}}</div>
   </div>
 </div>

@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class EventsComponent implements OnInit {
   //input
   imagesPath = 'events';
-  backgroundImage = '../../../../assets/background-portraits.jpg';
+  backgroundImage = '../../../../assets/background-events.jpg';
 
   constructor() { }
 

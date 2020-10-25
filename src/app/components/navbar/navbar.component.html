@@ -2,7 +2,7 @@
   <div class="nav-object edgy-font" *ngFor="let option of navbarOptions">
     <a  href="{{option.path}}">{{option.name}}</a>
   </div>
-  <button class="nav-icon btn" (click)="navbarRespond()">
+  <button id="menu-toggle" class="nav-icon btn" (click)="navbarRespond()">
     <i class="fa fa-bars "></i>
   </button>
 </nav>

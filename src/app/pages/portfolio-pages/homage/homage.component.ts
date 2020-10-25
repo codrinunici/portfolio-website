@@ -12,7 +12,7 @@ export class HomageComponent implements OnInit, OnDestroy {
   // inputs
 
   imagesPath = 'homage';
-  seriesText = 'test';
+  descriptionPath = 'homagedesc';
   backgroundImage = '../../../../assets/background-homage.jpg';
 
   constructor() {

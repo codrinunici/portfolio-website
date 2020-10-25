@@ -6,8 +6,10 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./bio.component.scss']
 })
 export class BioComponent implements OnInit {
+  bioText = '';
   bioImage: any;
   bioBackground = '../../../assets/background-homage.jpg';
+
   constructor() {
   }
 

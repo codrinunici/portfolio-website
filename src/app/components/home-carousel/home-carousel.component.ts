@@ -18,19 +18,29 @@ export class HomeCarouselComponent implements OnInit, OnDestroy {
 
   constructor(private database: DatabaseService) {
   }
+
   ngOnInit(): void {
+    let path = 'carousel'
     this.destroy$ = new Subject<boolean>();
-    this.database.getImages('carousel').pipe(takeUntil(this.destroy$)).subscribe(data => {
+    if (window.innerWidth < window.innerHeight) {
+      path = path + 'phone';
+    } else if (window.outerWidth > 2160) {
+      path = path + '2k4k';
+    }
+    console.log(path);
+    this.database.getFromFirestore(path).pipe(takeUntil(this.destroy$)).subscribe(data => {
       data.map(url => this.carouselImages.push(url));
       this.showImages = true;
     });
   }
+
   spinnerDissapears() {
     this.imgLoadedCount++;
     if (this.imgLoadedCount === this.carouselImages.length - 1) {
       this.showSpinner = false;
     }
   }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.unsubscribe();

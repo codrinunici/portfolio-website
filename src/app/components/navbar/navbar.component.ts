@@ -30,31 +30,24 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // resize navbar based on scroll
-    // const navObjects = document.getElementsByClassName('nav-object');
-    // console.log(actualWindowWidthScale)
-    // const icon = document.getElementsByClassName('nav-icon').item(0) as HTMLElement;
-    // icon.style.fontSize = '40px';
-    // icon.style.marginBottom = '15px';
-    // fromEvent(window, 'scroll').pipe(takeUntil(this.destroy$)).subscribe(data => {
-    //     if (document.scrollingElement.scrollTop + document.documentElement.clientHeight > document.documentElement.offsetHeight - 50) {
-    //       for (let i = 0; i < navObjects.length; ++i) {
-    //         const check = navObjects.item(i) as HTMLElement;
-    //         check.style.fontSize = String(actualWindowWidthScale + 40) + 'px';
-    //       }
-    //       icon.style.fontSize = '40px';
-    //       icon.style.marginBottom = '15px';
-    //     } else {
-    //       for (let i = 0; i < navObjects.length; ++i) {
-    //         const check = navObjects.item(i) as HTMLElement;
-    //         check.style.fontSize = String(actualWindowWidthScale) + 'px';
-    //       }
-    //       icon.style.fontSize = '25px';
-    //       icon.style.marginBottom = '0px';
-    //     }
-    //   }
-    // );
+    // kill responsive nav on window click
+    let menuToggled = false;
     const icon = document.getElementsByClassName('nav-icon').item(0) as HTMLElement;
+    fromEvent(icon, 'click').pipe(takeUntil(this.destroy$)).subscribe(data => {
+      menuToggled = true;
+    });
+
+    const nav = document.getElementById('bottomNav');
+    fromEvent(document, 'click').pipe(takeUntil(this.destroy$)).subscribe(data => {
+      if (!menuToggled) {
+        nav.className = 'bottom-nav';
+      } else {
+        menuToggled = false;
+      }
+    });
+
+
+    // set icon bigger on phones
     icon.style.fontSize = '25px';
     icon.style.marginBottom = '15px';
     fromEvent(window, 'scroll').pipe(takeUntil(this.destroy$)).subscribe(data => {

@@ -13,8 +13,9 @@ export class CollectionSelectionTemplateComponent implements OnInit, OnDestroy {
   showImages = false;
   showSpinner = true;
   private imgLoadedCount = 0;
-  public $destroy: Subject<boolean>;
+  private $destroy: Subject<boolean>;
   seriesThumbnails = [];
+  wereOnPhone = false;
 
   @Input()
   imagesPath = '';
@@ -28,10 +29,13 @@ export class CollectionSelectionTemplateComponent implements OnInit, OnDestroy {
     if (window.innerWidth > 2160)
       this.imagesPath = this.imagesPath + '2k4k';
     this.$destroy = new Subject<boolean>();
-    this.database.getImages(this.imagesPath).subscribe(data => {
+    this.database.getFromFirestore(this.imagesPath).pipe(takeUntil(this.$destroy)).subscribe(data => {
       data.map(url => this.seriesThumbnails.push(url));
       this.showImages = true;
     });
+    if (window.innerWidth < window.innerHeight) {
+      this.wereOnPhone = true;
+    }
     fromEvent(window, 'scroll').pipe(takeUntil(this.$destroy))
       .subscribe((e: Event) => {
         const scrolltotop = document.scrollingElement.scrollTop;

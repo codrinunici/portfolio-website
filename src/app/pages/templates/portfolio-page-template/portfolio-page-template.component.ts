@@ -16,15 +16,17 @@ export class PortfolioPageTemplateComponent implements OnInit, OnDestroy {
   @Input()
   imagesPath = '';
   @Input()
-  seriesText = '';
+  descriptionPath = '';
   @Input()
   backgroundImage = '';
 
   images = [];
+  seriesText: any;
   chosenImage: any = '';
   showSpinner = true;
   showImages = false;
   fullImageSize = '';
+
   constructor(private database: DatabaseService) {
   }
 
@@ -32,12 +34,15 @@ export class PortfolioPageTemplateComponent implements OnInit, OnDestroy {
     if (window.innerWidth > 2160) {
       this.imagesPath = this.imagesPath + '2k4k';
       this.fullImageSize = '4000w';
-    }
-    else{
+    } else {
       this.fullImageSize = '2000w';
     }
     this.destroy$ = new Subject<boolean>();
-    this.database.getImages(this.imagesPath).pipe(takeUntil(this.destroy$)).subscribe(data => {
+    this.database.getFromFirestore(this.descriptionPath).pipe(takeUntil(this.destroy$)).subscribe(data => {
+      // @ts-ignore
+      data.map(text => this.seriesText = text.text);
+    });
+    this.database.getFromFirestore(this.imagesPath).pipe(takeUntil(this.destroy$)).subscribe(data => {
       data.map(url => this.images.push(url));
       this.showImages = true;
     });
