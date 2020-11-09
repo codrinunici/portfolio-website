@@ -2,8 +2,8 @@
 
 <div id="page-content" class="container-fluid p-5" *ngIf="showImages"  style="background-image:url({{backgroundImage}})">
   <div class="image-container"
-       *ngFor="let thumbnail of seriesThumbnails">
-    <a href="{{thumbnail.path}}">
+       *ngFor="let thumbnail of images">
+    <a (click)="logCollectionOption(thumbnail.path)" href="{{thumbnail.path}}">
       <img class="series-image" alt="missing-thumbnail" (load)="spinnerDissapears()" src="{{thumbnail.url}}" >
     </a>
     <div *ngIf="wereOnPhone === false" class="image-caption edgy-title">{{thumbnail.title}}</div>

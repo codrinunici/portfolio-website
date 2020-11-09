@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {fromEvent, Subject} from 'rxjs';
 import {DatabaseService} from '../../../api/database.service';
 import {takeUntil} from 'rxjs/operators';
+import {GoogleAnalyticsService} from "../../../api/google-analytics.service";
 
 @Component({
   selector: 'app-portfolio-page-template',
@@ -20,6 +21,7 @@ export class PortfolioPageTemplateComponent implements OnInit, OnDestroy {
   @Input()
   backgroundImage = '';
 
+  private wereOnPhone = false;
   images = [];
   seriesText: any;
   chosenImage: any = '';
@@ -27,7 +29,7 @@ export class PortfolioPageTemplateComponent implements OnInit, OnDestroy {
   showImages = false;
   fullImageSize = '';
 
-  constructor(private database: DatabaseService) {
+  constructor(private database: DatabaseService, private analytics: GoogleAnalyticsService) {
   }
 
   ngOnInit() {
@@ -38,6 +40,11 @@ export class PortfolioPageTemplateComponent implements OnInit, OnDestroy {
       this.fullImageSize = '2000w';
     }
     this.destroy$ = new Subject<boolean>();
+
+    if (window.outerWidth < 768) {
+      this.wereOnPhone = true;
+    }
+
     this.database.getFromFirestore(this.descriptionPath).pipe(takeUntil(this.destroy$)).subscribe(data => {
       // @ts-ignore
       data.map(text => this.seriesText = text.text);
@@ -46,20 +53,21 @@ export class PortfolioPageTemplateComponent implements OnInit, OnDestroy {
       data.map(url => this.images.push(url));
       this.showImages = true;
     });
-
-    fromEvent(window, 'scroll').pipe(takeUntil(this.destroy$))
-      .subscribe((e: Event) => {
-        const scrolltotop = document.scrollingElement.scrollTop;
-        const target = document.getElementById('page-content');
-        const xvalue = 'center';
-        const factor = 0.83166;
-        const yvalue = scrolltotop * factor;
-        target.style.backgroundPosition = xvalue + ' ' + yvalue + 'px';
-      });
+    if (window.innerWidth > window.innerHeight) {
+      fromEvent(window, 'scroll').pipe(takeUntil(this.destroy$))
+        .subscribe((e: Event) => {
+          const scrolltotop = document.scrollingElement.scrollTop;
+          const target = document.getElementById('page-content');
+          const xvalue = 'center';
+          const factor = 0.63;
+          const yvalue = scrolltotop * factor;
+          target.style.backgroundPosition = xvalue + ' ' + yvalue + 'px';
+        });
+    }
   }
 
-  setFullSizeDynamically(tragedyImage: any) {
 
+  setFullSizeDynamically(tragedyImage: any) {
     if (window.innerWidth < 768) {
       this.chosenImage = '';
     } else {
@@ -67,16 +75,37 @@ export class PortfolioPageTemplateComponent implements OnInit, OnDestroy {
     }
   }
 
+  loadBackground() {
+    const content = document.getElementById('page-content');
+    let preloaderImg = document.createElement('img');
+    preloaderImg.src = this.backgroundImage;
+    preloaderImg.addEventListener('load', (event) => {
+      content.style.backgroundImage = `url(${this.backgroundImage})`;
+      preloaderImg = null;
+      this.spinnerDissapears();
+    });
+  }
+
   spinnerDissapears() {
     this.imgLoadedCount++;
-    if (this.imgLoadedCount === this.images.length - 1) {
+    if (!this.wereOnPhone && this.imgLoadedCount === this.images.length) {
+      this.loadBackground();
+    }
+    if (this.wereOnPhone && this.imgLoadedCount === this.images.length) {
       this.showSpinner = false;
     }
+    if (this.imgLoadedCount === this.images.length + 1) {
+      this.showSpinner = false;
+    }
+  }
+
+  logFullImageClick(portfolioImage: any) {
+    this.analytics.eventEmitter(
+      this.imagesPath + '_full_image_click', 'full_image_click', 'click', null, portfolioImage.name);
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.unsubscribe();
   }
-
 }

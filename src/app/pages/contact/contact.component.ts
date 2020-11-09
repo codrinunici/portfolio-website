@@ -8,11 +8,12 @@ import {DatabaseService} from '../../api/database.service';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-
-  contactBackground = '../../../assets/background-homage.jpg';
+  backgroundUrl = '../../../assets/background-homage.jpg';
+  contactBackground = '';
   contactForm: FormGroup;
   submitted = false;
   success = false;
+  showSpinner = true;
 
   constructor(private fb: FormBuilder, private db: DatabaseService) {
   }
@@ -23,6 +24,17 @@ export class ContactComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern('[^@ \\t\\r\\n]+@[^@ \\t\\r\\n]+\\.[^@ \\t\\r\\n]+')]],
       message: ['', [Validators.required, Validators.minLength(10)]],
       trappy: ['']
+    });
+    this.loadBackground();
+  }
+
+  loadBackground() {
+    let preloaderImg = document.createElement('img');
+    preloaderImg.src = this.backgroundUrl;
+    preloaderImg.addEventListener('load', (event) => {
+      this.contactBackground = this.backgroundUrl;
+      preloaderImg = null;
+      this.showSpinner = false;
     });
   }
 
@@ -39,7 +51,10 @@ export class ContactComponent implements OnInit {
         name: this.contactForm.controls.name.value,
         contactEmail: this.contactForm.controls.email.value,
         message: this.contactForm.controls.message.value,
-      }).then(data => this.success = true).catch(data => this.db.sendContactInfo({error: 'Someone tried to contact and failed'}));
+      }).then(data => {
+        this.success = true;
+        this.contactForm.reset();
+      }).catch(data => this.db.sendContactInfo({error: 'Someone tried to contact and failed'}));
     }
   }
 

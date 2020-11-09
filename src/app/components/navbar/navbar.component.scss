@@ -82,8 +82,10 @@
     transform: translateX(10px);
   }
 
-  .bottom-nav.responsive:hover {
-    background-color: transparentize(#0F1214, 1);
+  .bottom-nav:hover {
+    filter: brightness(1.3);
+    background-color: transparent;
+
   }
 }
 

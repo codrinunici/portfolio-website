@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "portfolio-93e0d"
+  },
+  "targets": {
+    "portfolio-93e0d": {
+      "hosting": {
+        "portfolio-website": [
+          "portfolio-93e0d"
+        ]
+      }
+    }
+  }
+}

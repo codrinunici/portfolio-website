@@ -1,4 +1,5 @@
-<div  class="container-fluid" style="background-image: url({{contactBackground}})">
+<app-load-spinner *ngIf="showSpinner"></app-load-spinner>
+<div id="page-content" *ngIf="!showSpinner" class="container-fluid" [ngStyle]="{'background-image':'url('+contactBackground+')'}">
   <h3 class="edgy-font">There are ways to contact me if you want to collaborate:</h3>
   <form [formGroup]="contactForm" (submit)="onSubmit()" class="container" >
     <label class="edgy-font" for="name">Name</label>
@@ -15,7 +16,7 @@
       </div>
     </div>
     <label class="edgy-font" for="email">Contact mail</label>
-    <input class="contact-input-field edgy-font" type="text" id="email" name="email" formControlName="email">
+    <input class="contact-input-field edgy-font" type="text" id="email" name="email" formControlName="email" >
     <div *ngIf="!controls.email?.valid && (controls.email?.dirty || controls.email?.touched)">
       <div *ngIf="submitted && controls.email.errors.required">
         <p class="alert-danger">I might need your contact mail</p>

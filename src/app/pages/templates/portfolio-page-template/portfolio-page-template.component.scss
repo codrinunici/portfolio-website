@@ -14,6 +14,7 @@
   column-count: 3;
   column-gap: 0;
   padding: 0;
+  margin-bottom: 1%;
 }
 
 .image-thumbnail {
@@ -26,6 +27,12 @@
   left: -10px;
 }
 
+.series-description {
+  padding-left:2%;
+  padding-right:2%;
+  padding-top: 1%;
+}
+
 .image-thumbnail:hover {
   filter: brightness(1.5);
 }
@@ -35,6 +42,7 @@
     -webkit-column-count: 1;
     -moz-column-count: 1;
     column-count: 1;
+    margin-bottom: 0;
   }
 
   .image-thumbnail:hover {
@@ -59,9 +67,9 @@
   }
 }
 
-@media only screen and (max-width: 1250px){
-  .container-fluid{
+@media only screen and (max-width: 1250px) {
+  .container-fluid {
     background-size: cover;
-    height:min-content;
+    height: min-content;
   }
 }

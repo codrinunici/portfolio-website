@@ -1,10 +1,10 @@
 <app-load-spinner *ngIf="showSpinner"></app-load-spinner>
-<div id="page-content" *ngIf="showImages" class="container-fluid " style="background-image:url({{backgroundImage}})">
-  <div class="series-description  col-md-6 col-lg-6  edgy-font">
+<div id="page-content" *ngIf="showImages" class="container-fluid ">
+  <div class="series-description  col-md-5 col-lg-5  edgy-font">
     {{seriesText}}
   </div>
-  <div class="image-panel  col-md-6 col-lg-6">
-    <a href="" (click)="setFullSizeDynamically(portfolioImage)"
+  <div class="image-panel  col-md-7 col-lg-7">
+    <a href="" (click)="setFullSizeDynamically(portfolioImage);logFullImageClick(portfolioImage)"
        *ngFor="let portfolioImage of images"
        data-toggle="modal"
        data-target="#fullImageModal">

@@ -1,20 +1,19 @@
 .spinner-container{
-  background-color: #1A1E1F;
+  background-color: black;
   display: flex;
   position: absolute;
   width:100%;
-  height:100vh;
+  height:150%;
   z-index:3;
   justify-content: center;
   transition: opacity 1s ease-out, visibility 1s;
-
 }
 .spinner-container.active{
   transition: opacity 1s ease-in, visibility 1s;
 }
 
 .sk-cube-grid {
-  align-self: center;
+  margin-top:20%;
   width: 100px;
   height: 100px;
 }
@@ -22,7 +21,7 @@
 .sk-cube-grid .sk-cube {
   width: 33%;
   height: 33%;
-  background-color:black;
+  background-color:#F0F0F0;
   float: left;
   -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
   animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;

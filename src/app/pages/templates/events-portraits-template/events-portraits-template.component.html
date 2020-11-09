@@ -1,7 +1,7 @@
 <app-load-spinner *ngIf="showSpinner"></app-load-spinner>
-<div id="page-content" *ngIf="showImages" class="container-fluid " style="background-image:url({{backgroundImage}})">
+<div id="page-content" *ngIf="showImages" class="container-fluid ">
   <div class="image-panel ">
-    <a href="" (click)="setFullSizeDynamically(epImage)"
+    <a href="" (click)="setFullSizeDynamically(epImage); logFullImageClick(epImage)"
        *ngFor="let epImage of images"
        data-toggle="modal"
        data-target="#fullImageModal">

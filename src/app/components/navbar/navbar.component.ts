@@ -1,6 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {fromEvent, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {GoogleAnalyticsService} from "../../api/google-analytics.service";
+
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +18,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ];
   destroy$: Subject<boolean>;
 
+  constructor(private analytics: GoogleAnalyticsService) {
+    this.destroy$ = new Subject<boolean>();
+  }
+
   navbarRespond() {
     const nav = document.getElementById('bottomNav');
     if (nav.className === 'bottom-nav') {
@@ -25,9 +31,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor() {
-    this.destroy$ = new Subject<boolean>();
-  }
 
   ngOnInit(): void {
     // kill responsive nav on window click
@@ -46,7 +49,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }
     });
 
-
     // set icon bigger on phones
     icon.style.fontSize = '25px';
     icon.style.marginBottom = '15px';
@@ -60,6 +62,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
         }
       }
     );
+  }
+
+  // eventName: string,
+  // eventCategory: string,
+  // eventAction: string,
+  // eventLabel: string = null,
+  // eventValue: number = null
+  logNavOption(option: string) {
+    this.analytics.eventEmitter(option +
+      '_nav_click', 'navigation', 'click');
   }
 
 

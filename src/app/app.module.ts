@@ -27,6 +27,8 @@ import {EventsComponent} from './pages/portfolio-pages/events/events.component';
 import {FestivalsComponent} from './pages/portfolio-pages/festivals/festivals.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DisableRightClickDirective } from './disable-right-click.directive';
+import {HttpClientModule} from '@angular/common/http';
+import {GoogleAnalyticsService} from './api/google-analytics.service';
 
 @NgModule({
   declarations: [
@@ -59,9 +61,10 @@ import { DisableRightClickDirective } from './disable-right-click.directive';
     BrowserAnimationsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [GoogleAnalyticsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
