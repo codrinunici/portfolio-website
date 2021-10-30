@@ -38,8 +38,8 @@ export class SeriesComponent implements OnInit, OnDestroy {
       name: string,
       url: string
     }] = [{name: '', url: ''}];
-    imageFullLg = await this.database.linksGetter('/portfolio-pages/festivals/large');
-    imageFullMd = await this.database.linksGetter('/portfolio-pages/festivals/medium');
+    imageFullLg = await this.database.linksGetter('/portfolio-pages/homage/large');
+    imageFullMd = await this.database.linksGetter('/portfolio-pages/homage/medium');
     console.log(imageFullMd)
     console.log(imageFullLg)
     imageFullLg.forEach((item, i) => {
@@ -50,7 +50,7 @@ export class SeriesComponent implements OnInit, OnDestroy {
     });
     this.imagesInfo.shift();
     if (this.imagesInfo.length > 1) {
-      this.database.addImages(this.imagesInfo, 'festivals');
+      this.database.addImages(this.imagesInfo, 'homage');
     }
     this.imagesInfo = [{name: '', url_large: '', url_medium: ''}];
   }

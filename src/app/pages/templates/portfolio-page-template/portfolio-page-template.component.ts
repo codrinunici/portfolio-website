@@ -2,7 +2,10 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {fromEvent, Subject} from 'rxjs';
 import {DatabaseService} from '../../../api/database.service';
 import {takeUntil} from 'rxjs/operators';
-import {GoogleAnalyticsService} from "../../../api/google-analytics.service";
+import {GoogleAnalyticsService} from '../../../api/google-analytics.service';
+import $ from 'jquery';
+
+declare var $: $;
 
 @Component({
   selector: 'app-portfolio-page-template',
@@ -28,6 +31,8 @@ export class PortfolioPageTemplateComponent implements OnInit, OnDestroy {
   showSpinner = true;
   showImages = false;
   fullImageSize = '';
+  fullImageIndex = -1;
+  showSlideshowSpinner = false;
 
   constructor(private database: DatabaseService, private analytics: GoogleAnalyticsService) {
   }
@@ -50,7 +55,7 @@ export class PortfolioPageTemplateComponent implements OnInit, OnDestroy {
       data.map(text => this.seriesText = text.text);
     });
     this.database.getFromFirestore(this.imagesPath).pipe(takeUntil(this.destroy$)).subscribe(data => {
-      data.map(url => this.images.push(url));
+      data.map(url => this.images.push({...(url as object), loaded: false}));
       this.showImages = true;
     });
     if (window.innerWidth > window.innerHeight) {
@@ -66,12 +71,31 @@ export class PortfolioPageTemplateComponent implements OnInit, OnDestroy {
     }
   }
 
-
-  setFullSizeDynamically(tragedyImage: any) {
-    if (window.innerWidth < 768) {
-      this.chosenImage = '';
+  setImageType(projectsImage: any) {
+    const fullImage = document.getElementById('currentFullSizeImg') as HTMLImageElement;
+    fullImage.className = '';
+    if (fullImage.width > fullImage.height) {
+      fullImage.className = 'landscape';
     } else {
-      this.chosenImage = tragedyImage;
+      fullImage.className = 'portrait';
+    }
+    projectsImage.loaded = true;
+    this.showSlideshowSpinner = false;
+  }
+
+  getNextPicture(factor: number) {
+    this.fullImageIndex += factor;
+    if (!this.images[this.fullImageIndex].loaded) {
+      this.showSlideshowSpinner = true;
+    }
+  }
+
+  selectFullSizeImage(projectsImageIndex: any) {
+    if (!this.wereOnPhone) {
+      this.fullImageIndex = projectsImageIndex;
+    }
+    if (!this.images[projectsImageIndex].loaded) {
+      this.showSlideshowSpinner = true;
     }
   }
 
@@ -83,16 +107,22 @@ export class PortfolioPageTemplateComponent implements OnInit, OnDestroy {
       content.style.backgroundImage = `url(${this.backgroundImage})`;
       preloaderImg = null;
       this.spinnerDissapears();
+      document.getElementById('page-content').style.position = 'static';
+      document.getElementById('page-content').style.overflow = 'visible';
     });
   }
 
   spinnerDissapears() {
     this.imgLoadedCount++;
+    document.getElementById('page-content').style.position = 'fixed';
+    document.getElementById('page-content').style.overflow = 'hidden';
     if (!this.wereOnPhone && this.imgLoadedCount === this.images.length) {
       this.loadBackground();
     }
     if (this.wereOnPhone && this.imgLoadedCount === this.images.length) {
       this.showSpinner = false;
+      document.getElementById('page-content').style.position = 'static';
+      document.getElementById('page-content').style.overflow = 'visible';
     }
     if (this.imgLoadedCount === this.images.length + 1) {
       this.showSpinner = false;

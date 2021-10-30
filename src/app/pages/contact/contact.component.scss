@@ -4,9 +4,24 @@
   justify-content: center;
   height: 100vh;
   flex-flow: column;
-  >h3{
+
+  > h3 {
     align-self: center;
     margin-bottom: 3%;
+  }
+}
+
+.modal-dialog {
+  position: relative;
+  top: 30%;
+  color: #111111;
+
+  > .modal-content {
+    background-color: #F0F0F0;
+
+    > .modal-header {
+      align-self: center
+    }
   }
 }
 
@@ -21,32 +36,39 @@ form {
     background-color: #111111;
     margin-bottom: 2%;
   }
+
   > textarea {
     height: 80%;
   }
 }
-.issatrap{
-  position:absolute;
-  bottom:150%;
+
+.issatrap {
+  position: absolute;
+  bottom: 150%;
 }
+
 .contact-submit {
   margin-top: 2%;
   width: min-content;
 }
-.social-media-container{
+
+.social-media-container {
   margin-top: 3%;
   display: flex;
   justify-content: center;
   flex-flow: column;
-  >h3{
+
+  > h3 {
     align-self: center;
   }
 }
+
 .icon-group {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
 .icon {
   transition: 0.3s;
   margin: 2%;
@@ -60,17 +82,20 @@ form {
   .container {
     width: 80%;
   }
-  label{
-    font-size:12px;
+  label {
+    font-size: 12px;
   }
-  .icon{
-    margin:5%;
+  .icon {
+    margin: 5%;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1439px) {
   .container {
     width: 60%;
+  }
+  .icon{
+    margin:5.5%;
   }
 }
 

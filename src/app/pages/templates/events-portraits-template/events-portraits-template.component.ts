@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {fromEvent, Subject} from "rxjs";
+import {fromEvent, Subject} from 'rxjs';
 import {DatabaseService} from "../../../api/database.service";
 import {takeUntil} from "rxjs/operators";
 import {GoogleAnalyticsService} from "../../../api/google-analytics.service";
@@ -26,8 +26,10 @@ export class EventsPortraitsTemplateComponent implements OnInit, OnDestroy {
   showSpinner = true;
   showImages = false;
   fullImageSize = '';
+  showSlideshowSpinner = false;
+  fullImageIndex = -1;
 
-  constructor(private database: DatabaseService, private analytics:GoogleAnalyticsService) {
+  constructor(private database: DatabaseService, private analytics: GoogleAnalyticsService) {
   }
 
   ngOnInit() {
@@ -44,7 +46,7 @@ export class EventsPortraitsTemplateComponent implements OnInit, OnDestroy {
 
     this.destroy$ = new Subject<boolean>();
     this.database.getFromFirestore(this.imagesPath).pipe(takeUntil(this.destroy$)).subscribe(data => {
-      data.map(url => this.images.push(url));
+      data.map(url => this.images.push({...(url as object), loaded: false}));
       this.showImages = true;
     });
     if (window.innerWidth > window.innerHeight) {
@@ -60,14 +62,35 @@ export class EventsPortraitsTemplateComponent implements OnInit, OnDestroy {
     }
   }
 
-  setFullSizeDynamically(tragedyImage: any) {
-    if (window.innerWidth < 768) {
-      this.chosenImage = '';
-    } else {
-      this.chosenImage = tragedyImage;
-    }
 
+  setImageType(peopleImage: any) {
+    const fullImage = document.getElementById('currentFullSizeImg') as HTMLImageElement;
+    fullImage.className = '';
+    if (fullImage.width > fullImage.height) {
+      fullImage.className = 'landscape';
+    } else {
+      fullImage.className = 'portrait';
+    }
+    peopleImage.loaded = true;
+    this.showSlideshowSpinner = false;
   }
+
+  getNextPicture(factor: number) {
+    this.fullImageIndex += factor;
+    if (!this.images[this.fullImageIndex].loaded) {
+      this.showSlideshowSpinner = true;
+    }
+  }
+
+  selectFullSizeImage(peopleImageIndex: any) {
+    if (!this.wereOnPhone) {
+      this.fullImageIndex = peopleImageIndex;
+    }
+    if (!this.images[peopleImageIndex].loaded) {
+      this.showSlideshowSpinner = true;
+    }
+  }
+
 
   loadBackground() {
     const content = document.getElementById('page-content');
@@ -78,11 +101,15 @@ export class EventsPortraitsTemplateComponent implements OnInit, OnDestroy {
       content.style.backgroundImage = `url(${this.backgroundImage})`;
       preloaderImg = null;
       this.spinnerDissapears();
+      document.getElementById('page-content').style.position = 'static';
+      document.getElementById('page-content').style.overflow = 'visible';
     });
   }
 
   spinnerDissapears() {
     this.imgLoadedCount++;
+    document.getElementById('page-content').style.position = 'fixed';
+    document.getElementById('page-content').style.overflow = 'hidden';
     if (!this.wereOnPhone && this.imgLoadedCount === this.images.length) {
       this.loadBackground();
       const content = document.getElementById('page-content');
@@ -94,6 +121,8 @@ export class EventsPortraitsTemplateComponent implements OnInit, OnDestroy {
       this.showSpinner = false;
     }
     if (this.wereOnPhone && this.imgLoadedCount === this.images.length) {
+      document.getElementById('page-content').style.position = 'static';
+      document.getElementById('page-content').style.overflow = 'visible';
       this.showSpinner = false;
     }
   }

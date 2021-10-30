@@ -29,6 +29,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DisableRightClickDirective } from './disable-right-click.directive';
 import {HttpClientModule} from '@angular/common/http';
 import {GoogleAnalyticsService} from './api/google-analytics.service';
+import { FullImageSpinnerComponent } from './components/full-image-spinner/full-image-spinner.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {GoogleAnalyticsService} from './api/google-analytics.service';
     EventsComponent,
     FestivalsComponent,
     DisableRightClickDirective,
+    FullImageSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,12 +72,5 @@ import {GoogleAnalyticsService} from './api/google-analytics.service';
 export class AppModule {
 }
 
-
-/** todo:
- *        unsubscribe observables at end of life **
- *        initial deploy/analytics
- *        centralize templates
- *        spinner and parallax on app.component only
- *        */
 
 

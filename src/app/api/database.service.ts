@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
-
+import {debounceTime} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +15,7 @@ export class DatabaseService {
   }
 
   getFromFirestore(path: string) {
-    return this.afs.collection(path).valueChanges();
+    return this.afs.collection(path).valueChanges().pipe(debounceTime(2000));
   }
 
   getImageLinks(path: string) {

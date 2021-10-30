@@ -21,7 +21,6 @@
   transition: 0.3s;
   align-self: center;
   margin-left: 1%;
-
   > a {
     color: #F6F6F6;
   }
@@ -41,7 +40,11 @@
   background-color: transparentize(#0F1214, 0.3);
 }
 
-
+@media only screen and (max-width: 1439px) {
+  .edgy-font{
+    font-size: 25px;
+  }
+}
 @media screen and (max-width: 768px) {
   .bottom-nav {
     width: 100%;

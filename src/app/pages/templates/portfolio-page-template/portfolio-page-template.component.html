@@ -4,10 +4,11 @@
     {{seriesText}}
   </div>
   <div class="image-panel  col-md-7 col-lg-7">
-    <a href="" (click)="setFullSizeDynamically(portfolioImage);logFullImageClick(portfolioImage)"
-       *ngFor="let portfolioImage of images"
+    <a href="" (click)="selectFullSizeImage(idx);logFullImageClick(portfolioImage)"
+       *ngFor="let portfolioImage of images; index as idx"
        data-toggle="modal"
-       data-target="#fullImageModal">
+       data-target="#fullImageModal"
+    >
       <img *ngIf="portfolioImage.name!==''"
            class="image-thumbnail"
            src="{{portfolioImage.url_medium}}"
@@ -17,21 +18,38 @@
   </div>
 </div>
 
-<div class="modal hide fade "
+<div class="modal hide fade"
      id="fullImageModal"
      tabindex="-1"
      role="document"
      aria-labelledby="fullImageModal"
      aria-hidden="true"
-     *ngIf="chosenImage!=''"
+     *ngIf="fullImageIndex!==-1"
 >
-  <div class="modal-dialog" role="document">
-    <div class="modal-title">
-    </div>
-    <div class="modal-body">
-      <img [src]="chosenImage.url_large"
-           srcset="{{chosenImage.url_large}} {{fullImageSize}}"
+  <div class="modal-content">
+    <div class="modal-dialog" role="dialog">
+      <div class="spinner-container">
+        <app-full-image-spinner *ngIf="showSlideshowSpinner"></app-full-image-spinner>
+      </div>
+      <img (load)="setImageType(images[fullImageIndex])" id="currentFullSizeImg"
+           [src]="images[fullImageIndex].url_large"
+           [ngStyle]="{'opacity': showSlideshowSpinner ? '0' : '1' }"
+           srcset="{{images[fullImageIndex].url_large}} {{fullImageSize}}"
            alt="fuck squared">
+    </div>
+    <div class="image-buttons">
+      <a class="icon"
+         *ngIf="fullImageIndex > 0"
+         (click)="getNextPicture(-1)">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+
+      <a class="icon"
+         *ngIf="fullImageIndex<images.length-1"
+         (click)="getNextPicture(1)">
+        <i class="fas fa-chevron-right"></i>
+      </a>
     </div>
   </div>
 </div>
+

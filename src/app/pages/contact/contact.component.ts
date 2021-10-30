@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatabaseService} from '../../api/database.service';
+import {Router} from '@angular/router';
+import $ from 'jquery';
+
+declare var $: $;
 
 @Component({
   selector: 'app-contact',
@@ -15,7 +19,7 @@ export class ContactComponent implements OnInit {
   success = false;
   showSpinner = true;
 
-  constructor(private fb: FormBuilder, private db: DatabaseService) {
+  constructor(private fb: FormBuilder, private db: DatabaseService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -51,10 +55,16 @@ export class ContactComponent implements OnInit {
         name: this.contactForm.controls.name.value,
         contactEmail: this.contactForm.controls.email.value,
         message: this.contactForm.controls.message.value,
-      }).then(data => {
+      }).then(() => {
         this.success = true;
+        $('#contactedSuccesfully').modal('show');
         this.contactForm.reset();
-      }).catch(data => this.db.sendContactInfo({error: 'Someone tried to contact and failed'}));
+        setTimeout(() => {
+            $('#contactedSuccesfully').modal('toggle');
+            this.router.navigate([''], {queryParams: {contact: 'yes'}});
+          }
+          , 2000);
+      }).catch(() => this.db.sendContactInfo({error: 'Someone tried to contact and failed'}));
     }
   }
 

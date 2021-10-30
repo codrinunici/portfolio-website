@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {fromEvent} from "rxjs";
 
 @Component({
   selector: 'app-load-spinner',
@@ -19,9 +18,7 @@ import {fromEvent} from "rxjs";
   host: {'[@fadeInAnimation]': ''}
 })
 export class LoadSpinnerComponent implements OnInit {
-
   constructor() {
-    window.outerHeight.valueChanges.subscribe()
   }
 
   ngOnInit(): void {

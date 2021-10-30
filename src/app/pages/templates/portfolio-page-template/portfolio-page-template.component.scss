@@ -15,6 +15,10 @@
   column-gap: 0;
   padding: 0;
   margin-bottom: 1%;
+
+  img:hover {
+    cursor: zoom-in;
+  }
 }
 
 .image-thumbnail {
@@ -22,19 +26,88 @@
   transition: 0.4s ease;
 }
 
-.modal-dialog {
-  position: absolute;
-  left: -10px;
+.modal {
+  display: flex;
+
+  .modal-dialog {
+    max-width: 100%;
+    margin: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+
+    .spinner-container {
+      position: absolute;
+    }
+
+    .landscape {
+      width: 60vw;
+      height: auto;
+    }
+
+    .portrait {
+      margin-top: 10vh;
+      height: 90vh;
+      width: auto;
+    }
+
+    img {
+      object-fit: contain;
+      transition: opacity 0.3s ease-out;
+      transition-delay: 0.2s;
+    }
+  }
+
+  .image-buttons {
+    position: absolute;
+    align-self: center;
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: auto;
+
+    > a {
+      opacity: 0.7;
+      margin: 2%;
+    }
+
+    > a:hover {
+      opacity: 1;
+      cursor: pointer;
+      filter: brightness(1.5);
+    }
+  }
+}
+
+.modal:hover {
+  cursor: url("data:image/svg+xml,%3Csvg width='46' height='45' viewBox='0 0 46 45' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='2.70711' y1='1.29289' x2='45.2709' y2='43.8567' stroke='%23F6F6F6' stroke-width='2'/%3E%3Cline x1='1.29289' y1='43.8537' x2='43.8537' y2='1.2929' stroke='%23F6F6F6' stroke-width='2'/%3E%3C/svg%3E%0A") 23 22.5, auto;
 }
 
 .series-description {
-  padding-left:2%;
-  padding-right:2%;
+  padding-left: 2%;
+  padding-right: 2%;
   padding-top: 1%;
 }
 
 .image-thumbnail:hover {
   filter: brightness(1.5);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -56,7 +129,30 @@
     -moz-column-count: 2;
     column-count: 2;
   }
+  .image-buttons {
+    .icon {
+      margin: 6%;
+      font-size: 55px;
+    }
+  }
+  .modal {
+    .modal-dialog {
+      .landscape {
+        width: 100vw;
+        height: auto;
+      }
 
+      .portrait {
+        height: 83vh;
+      }
+    }
+
+    .image-buttons {
+      > a {
+        margin: 4%;
+      }
+    }
+  }
 }
 
 @media only screen and (min-width: 1440px) {
@@ -71,5 +167,23 @@
   .container-fluid {
     background-size: cover;
     height: min-content;
+  }
+}
+
+@media only screen and (min-width: 2159px) {
+  .modal {
+    .modal-dialog {
+      .landscape {
+        width: 80vw;
+        height: auto;
+      }
+
+    }
+
+    .image-buttons {
+      > a {
+        margin: 4%;
+      }
+    }
   }
 }

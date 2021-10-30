@@ -1,8 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {fromEvent, Subject} from "rxjs";
+import {fromEvent, Subject} from 'rxjs';
 import {DatabaseService} from '../../../api/database.service';
-import {takeUntil} from "rxjs/operators";
-import {GoogleAnalyticsService} from "../../../api/google-analytics.service";
+import {takeUntil} from 'rxjs/operators';
+import {GoogleAnalyticsService} from '../../../api/google-analytics.service';
 
 @Component({
   selector: 'app-collection-selection-template',
@@ -30,7 +30,7 @@ export class CollectionSelectionTemplateComponent implements OnInit, OnDestroy {
       this.imagesPath = this.imagesPath + '2k4k';
     this.$destroy = new Subject<boolean>();
     this.database.getFromFirestore(this.imagesPath).pipe(takeUntil(this.$destroy)).subscribe(data => {
-      data.map(url => this.images.push(url));
+      this.images = data;
       this.showImages = true;
     });
     let factor = 0;
@@ -61,11 +61,16 @@ export class CollectionSelectionTemplateComponent implements OnInit, OnDestroy {
       content.style.backgroundImage = `url(${this.backgroundImage})`;
       preloaderImg = null;
       this.spinnerDissapears();
+      document.getElementById('page-content').style.position = 'static';
+      document.getElementById('page-content').style.overflow = 'visible';
     });
   }
 
   spinnerDissapears() {
     this.imgLoadedCount++;
+    document.getElementById('page-content').style.position = 'fixed';
+    document.getElementById('page-content').style.overflow = 'hidden';
+    console.log(this.imgLoadedCount)
     if (this.imgLoadedCount === this.images.length + 1) {
       this.showSpinner = false;
     }
