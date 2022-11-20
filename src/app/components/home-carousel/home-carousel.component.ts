@@ -20,7 +20,7 @@ export class HomeCarouselComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    let path = 'carousel'
+    let path = 'carousel';
     this.destroy$ = new Subject<boolean>();
     if (window.innerWidth < window.innerHeight) {
       path = path + 'phone';

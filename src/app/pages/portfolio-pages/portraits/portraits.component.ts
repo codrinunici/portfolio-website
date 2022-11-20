@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subject} from "rxjs";
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-portraits',
@@ -12,7 +12,6 @@ export class PortraitsComponent implements OnInit, OnDestroy {
 
   // inputs
   imagesPath = 'portraits';
-  seriesText = 'test';
   backgroundImage = '../../../../assets/background-portraits.jpg';
 
   constructor() {

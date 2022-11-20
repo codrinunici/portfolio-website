@@ -14,7 +14,6 @@ import {AppRoutingModule} from '../../app-routing.module';
 import {BioComponent} from './pages/bio/bio.component';
 import {ContactComponent} from './pages/contact/contact.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
-import {TragedyComponent} from './pages/portfolio-pages/tragedy/tragedy.component';
 import {PortraitsComponent} from './pages/portfolio-pages/portraits/portraits.component';
 import {SeriesComponent} from './pages/series/series.component';
 import {LoadSpinnerComponent} from './components/load-spinner/load-spinner.component';
@@ -23,13 +22,13 @@ import {HomageComponent} from './pages/portfolio-pages/homage/homage.component';
 import {EventsPortraitsTemplateComponent} from './pages/templates/events-portraits-template/events-portraits-template.component';
 import {CollectionSelectionTemplateComponent} from './pages/templates/collection-selection-template/collection-selection-template.component';
 import {PeopleComponent} from './pages/people/people.component';
-import {EventsComponent} from './pages/portfolio-pages/events/events.component';
 import {FestivalsComponent} from './pages/portfolio-pages/festivals/festivals.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DisableRightClickDirective } from './disable-right-click.directive';
 import {HttpClientModule} from '@angular/common/http';
 import {GoogleAnalyticsService} from './api/google-analytics.service';
 import { FullImageSpinnerComponent } from './components/full-image-spinner/full-image-spinner.component';
+import { LastNightComponent } from './pages/portfolio-pages/last-night/last-night.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,6 @@ import { FullImageSpinnerComponent } from './components/full-image-spinner/full-
     BioComponent,
     ContactComponent,
     NavbarComponent,
-    TragedyComponent,
     PortraitsComponent,
     SeriesComponent,
     LoadSpinnerComponent,
@@ -49,10 +47,10 @@ import { FullImageSpinnerComponent } from './components/full-image-spinner/full-
     EventsPortraitsTemplateComponent,
     CollectionSelectionTemplateComponent,
     PeopleComponent,
-    EventsComponent,
     FestivalsComponent,
     DisableRightClickDirective,
     FullImageSpinnerComponent,
+    LastNightComponent,
   ],
   imports: [
     BrowserModule,
